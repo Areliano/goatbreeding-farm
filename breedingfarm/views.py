@@ -1,12 +1,19 @@
 from django.shortcuts import render
-from .models import Homepage
+from .models import Homepage, About, Founder
+
 
 def homepage(request):
     homepage = Homepage.objects.first()
     return render(request, 'breedingfarm/homepage.html', {'homepage': homepage, 'nav': 'homepage'})
 
 def about(request):
-    return render(request, 'breedingfarm/about.html', {'nav': 'about'})
+    about = About.objects.first()
+    founders = Founder.objects.all()
+    return render(request, 'breedingfarm/about.html', {
+        'about': about,
+        'founders': founders,
+        'nav': 'about'
+    })
 
 def breeds(request):
     return render(request, 'breedingfarm/breeds.html', {'nav': 'breeds'})
